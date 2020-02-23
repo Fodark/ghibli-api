@@ -4,11 +4,14 @@
   "description": "",
   "main": "ghibli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "fodark",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
   }
 }
