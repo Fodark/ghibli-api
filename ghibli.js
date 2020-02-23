@@ -27,7 +27,7 @@ getFilms = async (options) => {
         data = data.filter(el => el.producer.toLowerCase().includes(options.producer))
       }
       if(options.year) {
-        data = data.filter(el => el.year === options.year)
+        data = data.filter(el => el.release_date === options.year)
       }
     }
 

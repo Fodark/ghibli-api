@@ -29,7 +29,6 @@ test('fetch non-director films', async () => {
     const resp = await getFilms({'director': 'michael bay'});
     expect(resp.ok).toBe(true);
     expect(resp.data).toBeInstanceOf(Array);
-    console.log(resp.data)
     expect(resp.data.length).toBe(0);
 });
 
@@ -38,4 +37,18 @@ test('search a single film by name', async () => {
     expect(resp.ok).toBe(true);
     expect(resp.data).toBeInstanceOf(Array);
     expect(resp.data.length).toBe(1);
+});
+
+test('search a film by its year', async () => {
+    const resp = await getFilms({'year': '1986'});
+    expect(resp.ok).toBe(true);
+    expect(resp.data).toBeInstanceOf(Array);
+    expect(resp.data.length).toBe(1);
+});
+
+test('search a year with no films', async () => {
+    const resp = await getFilms({'year': 1976});
+    expect(resp.ok).toBe(true);
+    expect(resp.data).toBeInstanceOf(Array);
+    expect(resp.data.length).toBe(0);
 });
