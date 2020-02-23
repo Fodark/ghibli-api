@@ -1,0 +1,1 @@
+This Node.js package provides a wrapper for the [Studio Ghibli API](https://ghibliapi.herokuapp.com/), without having to manually process HTTP requests. It provides the same endpoints as the original API but includes also the possibility to filter the results based on certain fields. More details below.
