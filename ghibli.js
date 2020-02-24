@@ -37,12 +37,40 @@ getFilms = async (options) => {
   }
 };
 
-getPeople = async () => {
+getPeople = async (options) => {
+  options = options || '';
+  let URL = `${BASE_URL}/people`;
+
+  if(typeof options === 'string' && isUUID(options)) {
+    // specific document
+    URL = `${URL}/${options}`
+  }
+  
   try {
-    const response = await axios.get(`${BASE_URL}/people`);
-    return (null, response.data);
+    const response = await axios.get(URL);
+    let data = response.data;
+
+    if(options instanceof Object) {
+      if(options.name) {
+        data = data.filter(el => el.name.toLowerCase().includes(options.name.toLowerCase()))
+      }
+      if(options.gender) {
+        data = data.filter(el => el.gender.toLowerCase().includes(options.gender.toLowerCase()))
+      }
+      if(options.age) {
+        data = data.filter(el => el.age.toLowerCase().includes(options.age.toLowerCase()))
+      }
+      if(options.eye_color) {
+        data = data.filter(el => el.eye_color.toLowerCase().includes(options.eye_color.toLowerCase()))
+      }
+      if(options.hair_color) {
+        data = data.filter(el => el.hair_color.toLowerCase().includes(options.hair_color.toLowerCase()))
+      }
+    }
+
+    return {'ok': true, 'data': data, 'error': null};
   } catch (error) {
-    return (error, null);
+    return {'ok': false, 'data': null, 'error': error};
   }
 };
 
