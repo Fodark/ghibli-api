@@ -73,18 +73,43 @@ getPeople = async (options) => {
   }
 };
 
-getLocations = async () => {
+getSpecies = async (options) => {
+  options = options || '';
+  let URL = `${BASE_URL}/species`;
+
+  if(typeof options === 'string' && isUUID(options)) {
+    // specific document
+    URL = `${URL}/${options}`
+  }
+
   try {
-    const response = await axios.get(`${BASE_URL}/locations`);
-    return (null, response.data);
+    const response = await axios.get(`${URL}`);
+    let data = response.data;
+
+    if(options instanceof Object) {
+      if(options.name) {
+        data = data.filter(el => el.name.toLowerCase().includes(options.name.toLowerCase()));
+      }
+      if(options.classification) {
+        data = data.filter(el => el.classification.toLowerCase().includes(options.classification.toLowerCase()));
+      }
+      if(options.eye_color) {
+        data = data.filter(el => el.eye_colors.toLowerCase().includes(options.eye_color.toLowerCase()));
+      }
+      if(options.hair_color) {
+        data = data.filter(el => el.hair_colors.toLowerCase().includes(options.hair_color.toLowerCase()));
+      }
+    }
+
+    return {'ok': true, 'data': data, 'error': null};
   } catch (error) {
-    return (error, null);
+    return {'ok': false, 'data': null, 'error': error};
   }
 };
 
-getSpecies = async () => {
+getLocations = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/species`);
+    const response = await axios.get(`${BASE_URL}/locations`);
     return (null, response.data);
   } catch (error) {
     return (error, null);

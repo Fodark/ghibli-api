@@ -6,7 +6,7 @@ test('fetch every person', async () => {
     expect(resp.data.length).toBeGreaterThan(0);
 });
 
-test('fetch a single film by UUID', async () => {
+test('fetch a single person by UUID', async () => {
     const resp = await getPeople('ba924631-068e-4436-b6de-f3283fa848f0');
     expect(resp.ok).toBe(true);
     expect(resp.data).toBeInstanceOf(Object);
