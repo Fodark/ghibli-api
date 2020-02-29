@@ -141,12 +141,34 @@ getLocations = async (options) => {
   }
 };
 
-getVehicles = async () => {
+getVehicles = async (options) => {
+  options = options || '';
+  let URL = `${BASE_URL}/vehicles`;
+
+  if(typeof options === 'string' && isUUID(options)) {
+    // specific document
+    URL = `${URL}/${options}`
+  }
+
   try {
-    const response = await axios.get(`${BASE_URL}/vehicles`);
-    return (null, response.data);
+    const response = await axios.get(`${URL}`);
+    let data = response.data;
+
+    if(options instanceof Object) {
+      if(options.name) {
+        data = data.filter(el => el.name.toLowerCase().includes(options.name.toLowerCase()));
+      }
+      if(options.description) {
+        data = data.filter(el => el.description.toLowerCase().includes(options.description.toLowerCase()));
+      }
+      if(options.length) {
+        data = data.filter(el => el.length.toLowerCase().includes(options.length.toLowerCase()));
+      }
+    }
+
+    return {'ok': true, 'data': data, 'error': null};
   } catch (error) {
-    return (error, null);
+    return {'ok': false, 'data': null, 'error': error};
   }
 };
 
@@ -155,5 +177,6 @@ module.exports = {
   getPeople,
   getLocations,
   getSpecies,
-  getLocations
+  getLocations,
+  getVehicles
 };
