@@ -107,12 +107,37 @@ getSpecies = async (options) => {
   }
 };
 
-getLocations = async () => {
+getLocations = async (options) => {
+  options = options || '';
+  let URL = `${BASE_URL}/locations`;
+
+  if(typeof options === 'string' && isUUID(options)) {
+    // specific document
+    URL = `${URL}/${options}`
+  }
+
   try {
-    const response = await axios.get(`${BASE_URL}/locations`);
-    return (null, response.data);
+    const response = await axios.get(`${URL}`);
+    let data = response.data;
+
+    if(options instanceof Object) {
+      if(options.name) {
+        data = data.filter(el => el.name.toLowerCase().includes(options.name.toLowerCase()));
+      }
+      if(options.climate) {
+        data = data.filter(el => el.climate.toLowerCase().includes(options.climate.toLowerCase()));
+      }
+      if(options.terrain) {
+        data = data.filter(el => el.terrain.toLowerCase().includes(options.terrain.toLowerCase()));
+      }
+      if(options.surface_water) {
+        data = data.filter(el => el.surface_water.toLowerCase().includes(options.surface_water.toLowerCase()));
+      }
+    }
+
+    return {'ok': true, 'data': data, 'error': null};
   } catch (error) {
-    return (error, null);
+    return {'ok': false, 'data': null, 'error': error};
   }
 };
 
