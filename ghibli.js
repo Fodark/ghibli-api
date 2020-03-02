@@ -3,8 +3,8 @@ const axios = require('axios').default;
 const BASE_URL = 'https://ghibliapi.herokuapp.com';
 const { isUUID } = require('validator');
 
-let getFilms = async (options) => {
-  options = options || '';
+const getFilms = async (opts) => {
+  const options = opts || '';
   let URL = `${BASE_URL}/films`;
 
   if (typeof options === 'string' && isUUID(options)) {
@@ -17,16 +17,22 @@ let getFilms = async (options) => {
     let { data } = response;
 
     if (options instanceof Object) {
-      if (options.title) {
-        data = data.filter((el) => el.title.toLowerCase().includes(options.title.toLowerCase()));
+      if (options.title && typeof (options.title) === 'string') {
+        data = data.filter((el) => el.title
+          .toLowerCase()
+          .includes(options.title.toLowerCase()));
       }
-      if (options.director) {
-        data = data.filter((el) => el.director.toLowerCase().includes(options.director.toLowerCase()));
+      if (options.director && typeof (options.director) === 'string') {
+        data = data.filter((el) => el.director
+          .toLowerCase()
+          .includes(options.director.toLowerCase()));
       }
-      if (options.producer) {
-        data = data.filter((el) => el.producer.toLowerCase().includes(options.producer.toLowerCase()));
+      if (options.producer && typeof (options.producer) === 'string') {
+        data = data.filter((el) => el.producer
+          .toLowerCase()
+          .includes(options.producer.toLowerCase()));
       }
-      if (options.year) {
+      if (options.year && typeof (options.year) === 'string') {
         data = data.filter((el) => el.release_date === options.year);
       }
     }
@@ -37,8 +43,8 @@ let getFilms = async (options) => {
   }
 };
 
-let getPeople = async (options) => {
-  options = options || '';
+const getPeople = async (opts) => {
+  const options = opts || '';
   let URL = `${BASE_URL}/people`;
 
   if (typeof options === 'string' && isUUID(options)) {
@@ -51,20 +57,30 @@ let getPeople = async (options) => {
     let { data } = response;
 
     if (options instanceof Object) {
-      if (options.name) {
-        data = data.filter((el) => el.name.toLowerCase().includes(options.name.toLowerCase()));
+      if (options.name && typeof (options.name) === 'string') {
+        data = data.filter((el) => el.name
+          .toLowerCase()
+          .includes(options.name.toLowerCase()));
       }
-      if (options.gender) {
-        data = data.filter((el) => el.gender.toLowerCase().includes(options.gender.toLowerCase()));
+      if (options.gender && typeof (options.gender) === 'string') {
+        data = data.filter((el) => el.gender
+          .toLowerCase()
+          .includes(options.gender.toLowerCase()));
       }
-      if (options.age) {
-        data = data.filter((el) => el.age.toLowerCase().includes(options.age.toLowerCase()));
+      if (options.age && typeof (options.age) === 'string') {
+        data = data.filter((el) => el.age
+          .toLowerCase()
+          .includes(options.age.toLowerCase()));
       }
-      if (options.eye_color) {
-        data = data.filter((el) => el.eye_color.toLowerCase().includes(options.eye_color.toLowerCase()));
+      if (options.eye_color && typeof (options.eye_color) === 'string') {
+        data = data.filter((el) => el.eye_color
+          .toLowerCase()
+          .includes(options.eye_color.toLowerCase()));
       }
-      if (options.hair_color) {
-        data = data.filter((el) => el.hair_color.toLowerCase().includes(options.hair_color.toLowerCase()));
+      if (options.hair_color && typeof (options.hair_color) === 'string') {
+        data = data.filter((el) => el.hair_color
+          .toLowerCase()
+          .includes(options.hair_color.toLowerCase()));
       }
     }
 
@@ -74,8 +90,8 @@ let getPeople = async (options) => {
   }
 };
 
-let getSpecies = async (options) => {
-  options = options || '';
+const getSpecies = async (opts) => {
+  const options = opts || '';
   let URL = `${BASE_URL}/species`;
 
   if (typeof options === 'string' && isUUID(options)) {
@@ -88,18 +104,22 @@ let getSpecies = async (options) => {
     let { data } = response;
 
     if (options instanceof Object) {
-      if (options.name) {
-        data = data.filter((el) => el.name.toLowerCase().includes(options.name.toLowerCase()));
+      if (options.name && typeof (options.name) === 'string') {
+        data = data.filter((el) => el.name
+          .toLowerCase()
+          .includes(options.name.toLowerCase()));
       }
-      if (options.classification) {
+      if (options.classification && typeof (options.classification) === 'string') {
         data = data.filter((el) => el.classification
           .toLowerCase()
           .includes(options.classification.toLowerCase()));
       }
-      if (options.eye_color) {
-        data = data.filter((el) => el.eye_colors.toLowerCase().includes(options.eye_color.toLowerCase()));
+      if (options.eye_color && typeof (options.eye_color) === 'string') {
+        data = data.filter((el) => el.eye_colors
+          .toLowerCase()
+          .includes(options.eye_color.toLowerCase()));
       }
-      if (options.hair_color) {
+      if (options.hair_color && typeof (options.hair_color) === 'string') {
         data = data.filter((el) => el.hair_colors
           .toLowerCase()
           .includes(options.hair_color.toLowerCase()));
@@ -112,8 +132,8 @@ let getSpecies = async (options) => {
   }
 };
 
-let getLocations = async (options) => {
-  options = options || '';
+const getLocations = async (opts) => {
+  const options = opts || '';
   let URL = `${BASE_URL}/locations`;
 
   if (typeof options === 'string' && isUUID(options)) {
@@ -126,16 +146,22 @@ let getLocations = async (options) => {
     let { data } = response;
 
     if (options instanceof Object) {
-      if (options.name) {
-        data = data.filter((el) => el.name.toLowerCase().includes(options.name.toLowerCase()));
+      if (options.name && typeof (options.name) === 'string') {
+        data = data.filter((el) => el.name
+          .toLowerCase()
+          .includes(options.name.toLowerCase()));
       }
-      if (options.climate) {
-        data = data.filter((el) => el.climate.toLowerCase().includes(options.climate.toLowerCase()));
+      if (options.climate && typeof (options.climate) === 'string') {
+        data = data.filter((el) => el.climate
+          .toLowerCase()
+          .includes(options.climate.toLowerCase()));
       }
-      if (options.terrain) {
-        data = data.filter((el) => el.terrain.toLowerCase().includes(options.terrain.toLowerCase()));
+      if (options.terrain && typeof (options.terrain) === 'string') {
+        data = data.filter((el) => el.terrain
+          .toLowerCase()
+          .includes(options.terrain.toLowerCase()));
       }
-      if (options.surface_water) {
+      if (options.surface_water && typeof (options.surface_water) === 'string') {
         data = data.filter((el) => el.surface_water
           .toLowerCase()
           .includes(options.surface_water.toLowerCase()));
@@ -148,8 +174,8 @@ let getLocations = async (options) => {
   }
 };
 
-let getVehicles = async (options) => {
-  options = options || '';
+const getVehicles = async (opts) => {
+  const options = opts || '';
   let URL = `${BASE_URL}/vehicles`;
 
   if (typeof options === 'string' && isUUID(options)) {
@@ -162,16 +188,20 @@ let getVehicles = async (options) => {
     let { data } = response;
 
     if (options instanceof Object) {
-      if (options.name) {
-        data = data.filter((el) => el.name.toLowerCase().includes(options.name.toLowerCase()));
+      if (options.name && typeof (options.name) === 'string') {
+        data = data.filter((el) => el.name
+          .toLowerCase()
+          .includes(options.name.toLowerCase()));
       }
-      if (options.description) {
+      if (options.description && typeof (options.description) === 'string') {
         data = data.filter((el) => el.description
           .toLowerCase()
           .includes(options.description.toLowerCase()));
       }
-      if (options.length) {
-        data = data.filter((el) => el.length.toLowerCase().includes(options.length.toLowerCase()));
+      if (options.length && typeof (options.length) === 'string') {
+        data = data.filter((el) => el.length
+          .toLowerCase()
+          .includes(options.length.toLowerCase()));
       }
     }
 
@@ -181,10 +211,12 @@ let getVehicles = async (options) => {
   }
 };
 
-module.exports = {
+const ghibli = {
   getFilms,
   getPeople,
   getLocations,
   getSpecies,
   getVehicles,
 };
+
+module.exports = ghibli;
