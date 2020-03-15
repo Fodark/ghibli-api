@@ -1,6 +1,6 @@
 {
   "name": "ghibli-api",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A Node.js wrapper for Studio Ghibli API, providing filtering options",
   "main": "ghibli.js",
   "scripts": {
