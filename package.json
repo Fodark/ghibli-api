@@ -1,7 +1,7 @@
 {
   "name": "ghibli-api",
-  "version": "0.1.1",
-  "description": "",
+  "version": "0.1.2",
+  "description": "A Node.js wrapper for Studio Ghibli API, providing filtering options",
   "main": "ghibli.js",
   "scripts": {
     "test": "jest"
@@ -11,6 +11,12 @@
     "type": "git",
     "url": "https://github.com/Fodark/ghibli-api"
   },
+  "keywords": [
+    "studio",
+    "ghibli",
+    "api",
+    "wrapper"
+  ],  
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
